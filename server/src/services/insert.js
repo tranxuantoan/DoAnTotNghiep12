@@ -7,7 +7,8 @@ import matbangvanphong from '../../data/matbangvanphong.json'
 import chothuetro from '../../data/chothuetro.json'
 import generateCode from '../ultis/generateCode'
 import { dataPrice, dataArea } from '../ultis/data'
-import { getNumberFromString } from '../ultis/common'
+import { getNumberFromString,getNumberFromStringV2 } from '../ultis/common'
+
 require('dotenv').config()
 const dataBody = [
     {
@@ -68,7 +69,9 @@ export const insertService = () => new Promise(async (resolve, reject) => {
                     imagesId,
                     areaCode: dataArea.find(area => area.max > currentArea && area.min <= currentArea) ?.code,
                     priceCode: dataPrice.find(area => area.max > currentPrice && area.min <= currentPrice) ?.code,
-                    provinceCode
+                    provinceCode,
+                    priceNumber: getNumberFromStringV2(item?.header?.attributes?.price),
+                    areaNumber: getNumberFromStringV2(item?.header?.attributes?.acreage)
                 })
                 await db.Attribute.create({
                     id: attributesId,

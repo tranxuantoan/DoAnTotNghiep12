@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Overview.hasOne(models.Post, {foreignKey: 'overviewId', as: 'overviews'})
       // define association here
     }
   }
@@ -19,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     target: DataTypes.STRING,
     bonus: DataTypes.STRING,
-    created: DataTypes.DATE,
-    expire: DataTypes.DATE,
+    created: DataTypes.STRING,
+    expire: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Overview',
